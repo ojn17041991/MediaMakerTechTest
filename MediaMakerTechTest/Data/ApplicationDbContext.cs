@@ -10,9 +10,6 @@ namespace PostmanSandbox.Data
 
         }
 
-        public DbSet<Addition> Additions { get; set; }
-        public DbSet<Subtraction> Subtractions { get; set; }
-        public DbSet<Multiplication> Multiplications { get; set; }
-        public DbSet<Division> Divisions { get; set; }
+        public DbSet<Request> Requests { get; set; }// { get { return Requests; } set { SaveChanges(); } }
     }
 }

@@ -1,3 +1,6 @@
+using MediaMakerTechTest.Data;
+using MediaMakerTechTest.Data.Abstractions;
+using MediaMakerTechTest.Models;
 using Microsoft.EntityFrameworkCore;
 using PostmanSandbox.Data;
 
@@ -12,6 +15,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         connectionString
     )
 );
+
+builder.Services.AddTransient<IDataAccessor<Request>, DataAccessor>();
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())

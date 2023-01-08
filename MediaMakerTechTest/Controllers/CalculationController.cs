@@ -1,4 +1,5 @@
-﻿using MediaMakerTechTest.Models;
+﻿using MediaMakerTechTest.Data.Abstractions;
+using MediaMakerTechTest.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
@@ -8,9 +9,18 @@ namespace MediaMakerTechTest.Controllers
     [ApiController]
     public class CalculationController : ControllerBase
     {
+        private IDataAccessor<Request> dataAccessor;
+
+        public CalculationController(IDataAccessor<Request> dataAccessor)
+        {
+            this.dataAccessor = dataAccessor;
+        }
+
         [HttpGet("[action]/{input1}, {input2}")]
         public string Add(double input1, double input2)
         {
+            dataAccessor.Add(new Request() { Description = $"Adding {input1} to {input2}" });
+
             return JsonSerializer.Serialize(
                 new Addition()
                 {
