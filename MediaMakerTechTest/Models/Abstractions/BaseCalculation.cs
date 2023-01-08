@@ -1,5 +1,8 @@
-﻿namespace MediaMakerTechTest.Models.Abstractions
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace MediaMakerTechTest.Models.Abstractions
 {
+    [Keyless]
     public abstract class BaseCalculation
     {
         public double Input1 { get; set; }
