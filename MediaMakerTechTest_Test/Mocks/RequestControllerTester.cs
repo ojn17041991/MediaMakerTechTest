@@ -54,14 +54,44 @@ namespace MediaMakerTechTest_Test.Mocks
             }
         }
 
-        //[Fact]
-        //public void Get_Add_Request_To_Controller()
-        //{
-        //    // Mocking the data access object used by the controller.
-        //    Mock<IDataAccessor<Request>> mock = new Mock<IDataAccessor<Request>>();
-        //    mock.Setup(s => s.Add(It.IsAny<Request>()));
+        // Simple test data for the Add test method.
+        public static IEnumerable<object[]> getInsertData()
+        {
+            yield return new object[] { new Request { Description = "Test 1" } };
+            yield return new object[] { new Request { Description = "Test 2" } };
+            yield return new object[] { new Request { Description = "Test 3" } };
+        }
 
-        //    // There is no controller.Add() function, so there is nothing to test.
-        //}
+        [Theory]
+        [MemberData(nameof(getInsertData))]
+        public void Get_Add_Request_To_Controller(Request request)
+        {
+            // Mocking the data access object used by the controller.
+            Mock<IDataAccessor<Request>> mock = new Mock<IDataAccessor<Request>>();
+
+            // Since we're mocking an add method, we need something to store the inserted values.
+            IList<Request> mockedDataStore = new List<Request>();
+
+            // Mock the data accessor Add method to insert into the data store.
+            mock.Setup(s => s.Add(It.IsAny<Request>())).Callback<Request>(r => mockedDataStore.Add(r));
+
+            // Converting the mocked object into a real one.
+            IDataAccessor<Request> dataAccessor = mock.Object;
+
+            // Instantiate the controller using the mocked data access object.
+            RequestController controller = new RequestController(dataAccessor);
+
+            // Call Add() on the controller.
+            // We're inserting to a mock data store. We don't care about the ActionResult itself.
+            ActionResult result = controller.Add(request);
+
+            // Make our assertions.
+            using (new AssertionScope())
+            {
+                mockedDataStore.Count().Should().Be(1);
+                mockedDataStore.First().Id.Should().Be(request.Id);
+                mockedDataStore.First().Description.Should().Be(request.Description);
+            }
+        }
     }
 }
