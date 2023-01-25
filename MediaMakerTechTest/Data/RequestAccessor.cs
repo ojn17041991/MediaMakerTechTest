@@ -4,13 +4,18 @@ using PostmanSandbox.Data;
 
 namespace MediaMakerTechTest.Data
 {
-    public class DataAccessor : IDataAccessor<Request>
+    public class RequestAccessor : IDataAccessor<Request>
     {
         private ApplicationDbContext context;
 
-        public DataAccessor(ApplicationDbContext context)
+        public RequestAccessor(ApplicationDbContext context)
         {
             this.context = context;
+        }
+
+        public IQueryable<Request> Get()
+        {
+            return context.Requests;
         }
 
         public void Add(Request t)

@@ -10,6 +10,6 @@ namespace PostmanSandbox.Data
 
         }
 
-        public DbSet<Request> Requests { get; set; }// { get { return Requests; } set { SaveChanges(); } }
+        public DbSet<Request> Requests { get; set; }
     }
 }

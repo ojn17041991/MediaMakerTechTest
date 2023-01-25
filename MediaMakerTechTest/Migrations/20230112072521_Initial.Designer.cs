@@ -11,7 +11,7 @@ using PostmanSandbox.Data;
 namespace MediaMakerTechTest.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230108190108_Initial")]
+    [Migration("20230112072521_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

@@ -33,6 +33,8 @@ namespace MediaMakerTechTest.Controllers
         [HttpGet("[action]/{input1}, {input2}")]
         public string Subtract(double input1, double input2)
         {
+            dataAccessor.Add(new Request() { Description = $"Subtracting {input1} by {input2}" });
+
             return JsonSerializer.Serialize(
                 new Subtraction()
                 {
@@ -45,6 +47,8 @@ namespace MediaMakerTechTest.Controllers
         [HttpGet("[action]/{input1}, {input2}")]
         public string Multiply(double input1, double input2)
         {
+            dataAccessor.Add(new Request() { Description = $"Multiplying {input1} by {input2}" });
+
             return JsonSerializer.Serialize(
                 new Multiplication()
                 {
@@ -57,6 +61,8 @@ namespace MediaMakerTechTest.Controllers
         [HttpGet("[action]/{input1}, {input2}")]
         public string Divide(double input1, double input2)
         {
+            dataAccessor.Add(new Request() { Description = $"Dividing {input1} by {input2}" });
+
             return JsonSerializer.Serialize(
                 new Division()
                 {

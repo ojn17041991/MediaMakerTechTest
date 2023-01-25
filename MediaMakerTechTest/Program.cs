@@ -16,7 +16,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     )
 );
 
-builder.Services.AddTransient<IDataAccessor<Request>, DataAccessor>();
+builder.Services.AddTransient<IDataAccessor<Request>, RequestAccessor>();
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
